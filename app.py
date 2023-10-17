@@ -1,18 +1,14 @@
+from flask import Flask, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
-
-# Import the dependencies.
-import numpy as np
-import sqlalchemy
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func, desc, text, and_
-from datetime import datetime, timedelta
 
-from flask import Flask, jsonify
+# Create a Flask application
+app = Flask(__name__)
 
+# Define your SQLAlchemy ORM models and setup
 Base = declarative_base()
 
 class NomadDestinations(Base):
@@ -61,54 +57,39 @@ class NomadDestinations(Base):
     internet_score = Column(String)
     leisure_quality = Column(String)
     safety_level = Column(String)
+
 # Database Setup
-engine = create_engine("sqlite:///Resources/nomad_db.db")
-
-# Create tables
+engine = create_engine("sqlite:///digitalnomad/Resources/nomad_db.db")
 Base.metadata.create_all(engine)
-
-# Create a session
 Session = sessionmaker(bind=engine)
-session = Session()
 
-# Now you can work with the NomadDestinations class and perform database operations
-
-# #################################################
-# # Flask Setup
-# #################################################
-app = Flask(__name__)
-
-# #################################################
-# # Flask Routes
-# #################################################
+# Define Flask routes
 @app.route("/")
 def welcome():
-     """List all available api routes."""
-     return (
-         f"Available Routes:<br/>"
-         f"<br/>"
-         f"/api/v1.0/destinations<br/>"
-         f"/api/v1.0/stations<br/>"
-         f"/api/v1.0/tobs<br/>"
-         f"/api/v1.0/start_date<br/>"
-         f"/api/v1.0/start_date/end_date<br/>"
-     )
+    """List all available API routes."""
+    return "Welcome to the Nomad Destinations API!"
 
 @app.route("/api/v1.0/destinations")
 def destinations():
-    conn = engine.connect()
-    all_destinations_query = text("SELECT DISTINCT long_slug FROM nomad_destinations")
-    all_destinations = conn.execute(all_destinations_query).fetchall()
+    # Create a session within the Flask context
+    with app.app_context():
+        session = Session()
+        query = text("SELECT * from nomad_destinations")
+        results = session.execute(query).all()
+        session.close()
 
-    conn.close()
+        # Convert results to a JSON format
+        destinations = []
+        for row in results:
+            destination_dict = {
+                "long_slug": row.long_slug,
+                "region": row.region
+                # Add more fields as needed
+            }
+            destinations.append(destination_dict)
 
-    destinations = []
-    for row in all_destinations:
-        destination_dict = {}
-        destination_dict["long_slug"] = row['long_slug']
-        destinations.append(destination_dict)
-    
     return jsonify(destinations)
 
+# Run the Flask app
 if __name__ == "__main__":
     app.run(debug=True)
