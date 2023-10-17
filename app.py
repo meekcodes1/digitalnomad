@@ -83,7 +83,7 @@ def destinations():
         for row in results:
             destination_dict = {
                 "long_slug": row.long_slug,
-                "region": row.region
+                "region": row.region,
                 # Add more fields as needed
             }
             destinations.append(destination_dict)
