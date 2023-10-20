@@ -12,3 +12,8 @@ Team Members (Group 6):
 3. Rebecca Daaleman
 4. Patrick Moon
 5. Moises Contreras
+
+Resources:
+https://plotly.com/javascript/choropleth-maps/
+https://www.chartjs.org/docs/latest/charts/bar.html
+https://plotly.com/javascript/line-and-scatter/#data-labels-hover

@@ -11,11 +11,49 @@ fetch('http://localhost:5000/get_data')
     // Populate the dropdown with the data and initialize
     populateDropdown(data);
     populateMap(data);
+    barMap(data);
+    make_plot(data);
     init();
   })
   .catch(error => {
     console.error('Error:', error);
   });
+
+  function barMap(chart) {
+    let labels2 = ['Ericeira', 'Battle-Creek', 'Houston', 'Tucson', 'Los-Angeles', 'Lubbock'];
+    let data2 = [96, 70, 69, 67, 66, 64];
+    let colors2 = ['#49A9EA', '#36CAAB', '#34495E', '#B370CF', '#AC5353', '#CFD4D8'];
+    let myChart2 = document.getElementById("myChart2").getContext('2d');
+    let chart2 = new Chart(myChart2, {
+        type: 'bar',
+        data: {
+            labels: labels2,
+            datasets: [{
+                data: data2,
+                backgroundColor: colors2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Mbps'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    text: "Top 6 cities by Internet Speed",
+                    display: true
+                },
+                legend: {
+                  display: false
+              }}
+        }
+    });
+}
 
   // Plotly Map
   function populateMap(input) {
@@ -68,6 +106,26 @@ fetch('http://localhost:5000/get_data')
     };
     // Plot the results
     Plotly.newPlot("heatmap", data, layout, {showLink: false});
+    };
+
+  function make_plot(data){
+      //scatter plot
+          var scatter_plot = [{
+              x: data.map(row => row.cost_for_nomad_in_usd),
+              y: data.map(row => row.region),
+              mode: 'markers+text',
+              marker: {
+                  size: 10,
+              },
+              type: 'scatter',
+              name: "Digital Nomads"
+          }];
+          var layout = {
+              title: 'Cost for Digital Nomads Based on Regions',
+              xaxis: {title: "Cost(USD)"},
+              yaxis: {automargin: true}
+          };
+          Plotly.newPlot('plot',scatter_plot,layout);
     };
 
 function populateDropdown(data) {
