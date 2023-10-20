@@ -103,7 +103,7 @@ function createMarkers(response) {
       + "<br>" +
       "<b>Country: </b>" + country_name
       + "<br>" +
-      "<b>Internet Speed: </b>" + internet_speed + " MB/s"
+      "<b>Overall Score: </b>" + "<b>" + overall_score + "</b>"
       + "<br>" +
       "<b>Air Quality Score: </b>" + air_quality_score
       + "<br>" +
