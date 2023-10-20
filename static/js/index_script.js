@@ -24,22 +24,16 @@ fetch('http://localhost:5000/get_data')
   
     // For each row, iterate over all of the rows (i by j) to average the internet speed by country
     for(let i = 0; i < input.length; i++) {
-      
       sumCountry = 0;
       countryCount = 0;
-  
+
       for(let j = 0; j < input.length; j++) {
-        
         if(input[i]['country'] == input[j]['country']) {
-  
           sumCountry = sumCountry + input[j]['internet_speed'];
           countryCount = countryCount + 1;
         }
-  
       }
-      
       dict[input[i]['country']] = Math.round((sumCountry / countryCount)*100)/100;
-  
     }
   
     // heatmap data
@@ -51,14 +45,13 @@ fetch('http://localhost:5000/get_data')
         colorscale: [
           [0,'rgb(5, 10, 172)'],[0.35,'rgb(40, 60, 190)'],
           [0.5,'rgb(70, 100, 245)'], [0.6,'rgb(90, 120, 245)'],
-          [0.7,'rgb(106, 137, 247)'],[1,'rgb(220, 220, 220)']],
+          [0.7,'rgb(106, 137, 247)'],[1,'rgb(220, 220, 220)']
+        ],
         colorbar: {
           title: 'Mbps',
           thickness: 20},
         autocolorscale: false,
         reversescale: true
-        
-  
     }];
   
     // heatmap layout
@@ -73,10 +66,8 @@ fetch('http://localhost:5000/get_data')
           }
       }
     };
-  
     // Plot the results
     Plotly.newPlot("heatmap", data, layout, {showLink: false});
-  
     };
 
 function populateDropdown(data) {
@@ -101,12 +92,10 @@ function init() {
 }
 
 function update_MetaData(selectedValue) {
-  // Use the 'data' variable to find and update metadata.
   let selectedSample = data.find(sample => sample.name + ", " + sample.country === selectedValue);
   let MetadataDiv = d3.select("#sample-metadata");
   MetadataDiv.html("");
   
-  // Display only the "country" key
   MetadataDiv.append("p").html(`<b>Region:</b> ${selectedSample.region}`);
   MetadataDiv.append("p").html(`<b>Population:</b> ${selectedSample.population}`);
   MetadataDiv.append("p").html(`<b>Humidity:</b> ${selectedSample.humidity}%`);

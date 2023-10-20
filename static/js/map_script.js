@@ -2,9 +2,8 @@ let CenterCoords = [26.8173686,25.5869105]; //Egypt
 let mapZoomLevel = 3;
 let myMap;
 
-// Create the createMap function.
+// Create the map
 function createMap(CityData) {
-// Create the tile layer that will be the background of our map.
 let backgroundMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
@@ -12,7 +11,7 @@ let backgroundMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.
 let BaseMaps = {
   "Street Map": backgroundMap
 };
-// Create an overlayMaps object to hold the Earthquakes layer.
+// Create an overlayMaps object to hold the city layer.
 let overlayMaps = {
   "Cities": CityData
 };
@@ -22,13 +21,13 @@ myMap = L.map("map", {
     zoom: mapZoomLevel,
     layers: [backgroundMap, CityData]
 })
-// Create a layer control, and pass it baseMaps and overlayMaps. Add the layer control to the map.
+
 L.control.layers(BaseMaps, overlayMaps).addTo(myMap);
 createLegend();
 }
 
 function createLegend() {
-  // Create a legend to display information about Earthquake depths.
+  // Create a legend to display information about nomad destinations.
       let legend = L.control({
         position: "bottomright"
       });
@@ -97,8 +96,6 @@ function createMarkers(response) {
       fillColor: color,
       radius: 50000
     }).bindPopup(
-      // Populate the popup content as needed
-      // You can access city properties like: city.propertyName
       "<b>City Name: </b>" + city_name
       + "<br>" +
       "<b>Country: </b>" + country_name
@@ -120,7 +117,6 @@ function createMarkers(response) {
     All_CityMarkers.push(CityMarker);
   });
 
-  // Create the map with the markers.
   createMap(L.layerGroup(All_CityMarkers));
 }
 
