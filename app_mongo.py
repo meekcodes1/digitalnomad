@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 CORS(app)
 
-# Configure your MongoDB URI
+# Configure MongoDB URI
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/project3'
 mongo = PyMongo(app)
 

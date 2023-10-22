@@ -1,4 +1,4 @@
-let data; // Declare the data variable in a broader scope
+let data;
 
 // Fetch data from the Flask API
 fetch('http://localhost:5000/get_data')
@@ -18,7 +18,6 @@ fetch('http://localhost:5000/get_data')
   .catch(error => {
     console.error('Error:', error);
   });
-
 
 // BAR CHART FUNCTION
 // Creating bar chart for the top 6 cities by internet speed
@@ -77,7 +76,6 @@ function barMap(chart) {
   });
 }
 
-
 // CHOROPLETH FUNCTION
 // Function to create heatmap for average internet speed by country
 function populateMap(input) {
@@ -133,7 +131,6 @@ function populateMap(input) {
   Plotly.newPlot("heatmap", data, layout, {showLink: false});
   };
 
-
 // SCATTER PLOT FUNCTION
 // Function to create scatter plot of cost by city
   function make_plot(data){
@@ -163,7 +160,6 @@ function populateMap(input) {
           Plotly.newPlot('plot',scatter_plot,layout);
     };
 
-
 // Function to populate the dropdown box
 function populateDropdown(data) {
   data.sort((a, b) => a.name.localeCompare(b.name));
@@ -175,13 +171,11 @@ function populateDropdown(data) {
   });
 }
 
-
 // Function to handle changes to the dropdown box selection
 function optionChanged(selectedValue) {
   console.log("Selected value: " + selectedValue);
   update_MetaData(selectedValue);
 }
-
 
 // Initial function
 function init() {
@@ -189,7 +183,6 @@ function init() {
     optionChanged(data[0].name + ", " + data[0].country);
   }
 }
-
 
 // Function to populate the desination details information box
 function update_MetaData(selectedValue) {
