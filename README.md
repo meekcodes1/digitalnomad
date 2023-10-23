@@ -32,3 +32,4 @@ Resources:
 8. Specify decimal points in Javascript - https://www.w3schools.com/jsref/jsref_tofixed.asp
 9. Color scale RGB codes - https://www.rapidtables.com/web/color/RGB_Color.html
 10. ChatGPT for debugging code
+11. Digital Nomad definition - https://en.wikipedia.org/wiki/Digital_nomad
