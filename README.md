@@ -21,6 +21,19 @@ To start up the dashboard:
 4. Run app_mongo.py.
 5. Open index.html.
 -----
+Files in this repository:
+1. static folder
+  - css > "style.css" contains the styling for index.html
+  - js > index_script.js contains the javascript code for the main dashboard
+  - js > map_script.js contains the javascript code for the leaflet map
+2. "Nomad Analysis.pptx" is the background slide deck
+3. "app_mongo.py" runs the flask app
+4. "digitalnomad_json.json" is the json file used to populate the MongoDB collection
+5. "digitalnomad_setup.ipynb" generates the JSON file mentioned above
+6. "index.html" contains the html code for the dashboard
+7. "map.html" contains the html code for the leaflet map
+8. "safety_bar_graph.png" contains a bar graph image used in the main dashboard
+-----
 Resources:
 1. https://plotly.com/javascript/choropleth-maps/
 2. https://www.chartjs.org/docs/latest/charts/bar.html
